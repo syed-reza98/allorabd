@@ -2,7 +2,7 @@ import { defineNuxtConfig } from "nuxt/config";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ["@nuxt/ui"], //"@nuxtjs/tailwindcss"
+  modules: ["@nuxtjs/tailwindcss"],
   runtimeConfig: {
     public: {
       backendUrl: "http://localhost:8000",
@@ -14,11 +14,5 @@ export default defineNuxtConfig({
   },
   experimental: {
     asyncContext: true,
-    },
-
-    devtools: {
-    timeline: {
-        enabled: true
-    }
   }
 });
