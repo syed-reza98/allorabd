@@ -1,0 +1,1 @@
+export { default } from "file:///F:/Hassan%20Bhai/allorabd/allora/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

@@ -1,0 +1,71 @@
+<script setup lang="ts">
+import type { Ref } from 'vue';
+const route = useRoute()
+const { data: product } = await useFetch(`http://localhost:8000/api/products/`+ route.params.id);
+const { data: products } = await useFetch(`http://localhost:8000/api/products`);
+console.log(product);
+</script>
+<template>
+    <NuxtLayout name="main-layout">
+    <ContentDoc>
+      <div v-if="product" class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row">
+            <img :src="product.data.image_url" class="max-w-sm rounded-lg shadow-2xl" />
+            <div>
+            <h1 class="text-5xl font-bold">{{ product.data.name }}</h1>
+            <p class="py-6">{{ product.data.description }}</p>
+            <button class="btn btn-primary">{{ product.data.price }}</button>
+            </div>
+        </div>
+      </div>
+    </ContentDoc>
+      <section class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+      <!--   ✅ Product card 1 - Starts Here 👇 -->
+      <div v-if="products && products.data" v-for="product in products.data" :key="product.id">
+        <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+          <NuxtLink class="text-purple-600 font-bold" :to="'/products/' + product.id">
+            <img :src="product.image_url" alt="Product" class="h-80 w-72 object-cover rounded-t-xl" />
+            <div class="px-4 py-3 w-72">
+              <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+              <p class="text-lg font-bold text-black truncate block capitalize">{{ product.name }}</p>
+              <div class="flex items-center">
+                <p class="text-lg font-semibold text-black cursor-auto my-3">{{ product.price }}</p>
+                <del>
+                  <!-- <p class="text-sm text-gray-600 cursor-auto ml-2">{{ product.price }}</p> -->
+                </del>
+                <div class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-bag-plus" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                    <path
+                      d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                  </svg></div>
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
+      <!--   🛑 Product card 1 - Ends Here  -->
+    </section>
+    </NuxtLayout>
+</template>
+<!-- <script>
+export default {
+    data: () => ({
+        product: {}
+    }),
+
+    async fetch() {
+        const response = await this.$axios.$get('/api/products/' + this.$route.params.product)
+
+        this.product = response.data;
+    },
+
+    head() {
+        return {
+            title: this.product.name + ' — ergodnc',
+        }
+    },
+}
+console.log(product);
+</script> -->

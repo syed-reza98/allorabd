@@ -7,6 +7,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
 {
+
+    // __Illuminate\Http\Resources\Json\JsonResource::construct
+    // Create a new resource instance.
+    // public function __construct($resource)
+    // {
+    //     parent::__construct($resource);
+    //     $this->resource = $resource;
+    // }
+
     /**
      * Transform the resource into an array.
      *

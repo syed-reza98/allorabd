@@ -1,0 +1,44 @@
+<template>
+    <NuxtLayout name="main-layout">
+    <!-- <p v-if="$fetchState.pending">Loading...</p>
+    <p v-else-if="$fetchState.error">Error! :(</p> -->
+    <!-- <div v-else class="flex"> -->
+        <div class="flex">
+        <div class="w-1/2 h-80 relative overflow-hidden rounded-lg">
+            <img :src="product.image_url" class="object-cover w-full h-full">
+        </div>
+
+        <div class="w-full pl-14">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">{{ product.name }}</h1>
+                <span class="block font-semibold">${{ product.price }} per day</span>
+            </div>
+            <p class="leading-loose mb-5">
+                {{ product.name }}
+            </p>
+            <Button class="mt-7">Book</Button>
+        </div>
+    </div>
+    </NuxtLayout>
+</template>
+
+<script>
+export default {
+    data: () => ({
+        product: {}
+    }),
+
+    async fetch() {
+        const response = await this.$axios.$get('/api/products/' + this.$route.params.product)
+
+        this.product = response.data;
+    },
+
+    head() {
+        return {
+            title: this.product.name + ' — ergodnc',
+        }
+    },
+}
+console.log(product);
+</script>

@@ -1,8 +1,13 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { resolve} from "path";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss"],
+  modules: ["@nuxtjs/tailwindcss","@nuxt/image"],
+  alias: {
+    // "@": resolve(__dirname, "/"),
+    assets: "/<rootDir>/assets",
+  },
   runtimeConfig: {
     public: {
       backendUrl: "http://localhost:8000",
@@ -20,5 +25,6 @@ export default defineNuxtConfig({
     timeline: {
       enabled: true
     }
-  }
+  },
+
 });

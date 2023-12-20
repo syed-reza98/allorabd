@@ -16,7 +16,8 @@ class ProductController extends Controller
     {
         $products = Product::paginate(10);
 
-        return ProductResource::collection($products);
+        // return ProductResource::collection($products);
+        return response()->json($products);
     }
 
     /**
@@ -30,7 +31,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreProductRequest $request, Product $product)
     {
         $product = Product::create($request->all());
 
@@ -42,7 +43,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        // return (new ProductResource($product))->response();
+        return new ProductResource($product);
     }
 
     /**

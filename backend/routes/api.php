@@ -22,9 +22,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 Route::apiResource('categories', CategoryController::class)->except([
-    'create', 'show', 'edit'
+    'create', 'edit'
 ]);
 
-Route::apiResource('products', ProductController::class)->except([
-    'create', 'edit', 'show'
-]);
+// Route::apiResource('products', ProductController::class)->except([
+//     'create', 'edit'
+// ]);
+
+Route::get('products', [ProductController::class, 'index'])->name('products.index');
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
