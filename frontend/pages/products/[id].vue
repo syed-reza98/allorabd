@@ -4,7 +4,21 @@ import { ref } from 'vue'
 const route = useRoute()
 
 const { data: product } = await useFetch(`http://localhost:8000/api/products/`+ route.params.id);
-const { data: products } = await useFetch(`http://localhost:8000/api/products`);
+const { data: products, pending } = await useAsyncData(
+  "products",
+  () => $fetch('http://localhost:8000/api/products'),
+  {
+    transform: (products) =>
+      products.data.map((product) => ({
+        id: product.id,
+        name: product.name,
+        image_url: product.image_url,
+        description: product.description,
+        price: product.price,
+      })),
+      lazy: true,
+  }
+);
 console.log(product);
 import {
   Disclosure,
@@ -132,7 +146,7 @@ import { HeartIcon, MinusIcon, PlusIcon } from '@heroicons/vue/24/outline'
       <div class="relative mt-8">
             <div class="relative w-full overflow-x-auto">
               <ul role="list" class="inline-flex mx-4 space-x-8 sm:mx-6 lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-x-8 lg:space-x-0">
-                <li v-for="product in products.data" :key="product.id" class="inline-flex flex-col w-64 text-center lg:w-auto">
+                <li v-for="product in products" :key="product.id" class="inline-flex flex-col w-64 text-center lg:w-auto">
                   <div class="relative group">
                     <div class="w-full overflow-hidden bg-gray-200 rounded-md aspect-h-1 aspect-w-1">
                       <!-- <img :src="product.image_url" :alt="product.imageAlt" class="object-cover object-center w-full h-full group-hover:opacity-75" /> -->

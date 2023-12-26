@@ -22,26 +22,26 @@
 
         <div class="fixed inset-0 z-40 flex">
           <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full">
-            <DialogPanel class="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
-              <div class="flex px-4 pb-2 pt-5">
-                <button type="button" class="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400" @click="mobileMenuOpen = false">
+            <DialogPanel class="relative flex flex-col w-full max-w-xs pb-12 overflow-y-auto bg-white shadow-xl">
+              <div class="flex px-4 pt-5 pb-2">
+                <button type="button" class="inline-flex items-center justify-center p-2 -m-2 text-gray-400 rounded-md" @click="mobileMenuOpen = false">
                   <span class="sr-only">Close menu</span>
-                  <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                  <XMarkIcon class="w-6 h-6" aria-hidden="true" />
                 </button>
               </div>
 
               <!-- Links -->
               <TabGroup as="div" class="mt-2">
                 <div class="border-b border-gray-200">
-                  <TabList class="-mb-px flex space-x-8 px-4">
+                  <TabList class="flex px-4 -mb-px space-x-8">
                     <Tab as="template" v-for="category in navigation.categories" :key="category.name" v-slot="{ selected }">
                       <button :class="[selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900', 'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium']">{{ category.name }}</button>
                     </Tab>
                   </TabList>
                 </div>
                 <TabPanels as="template">
-                  <TabPanel v-for="(category, categoryIdx) in navigation.categories" :key="category.name" class="space-y-12 px-4 pb-6 pt-10">
-                    <div class="grid grid-cols-1 items-start gap-x-6 gap-y-10">
+                  <TabPanel v-for="(category, categoryIdx) in navigation.categories" :key="category.name" class="px-4 pt-10 pb-6 space-y-12">
+                    <div class="grid items-start grid-cols-1 gap-x-6 gap-y-10">
                       <div class="grid grid-cols-1 gap-x-6 gap-y-10">
                         <div>
                           <p :id="`mobile-featured-heading-${categoryIdx}`" class="font-medium text-gray-900">Featured</p>
@@ -84,32 +84,32 @@
                 </TabPanels>
               </TabGroup>
 
-              <div class="space-y-6 border-t border-gray-200 px-4 py-6">
+              <div class="px-4 py-6 space-y-6 border-t border-gray-200">
                 <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                  <a :href="page.href" class="-m-2 block p-2 font-medium text-gray-900">{{ page.name }}</a>
+                  <a :href="page.href" class="block p-2 -m-2 font-medium text-gray-900">{{ page.name }}</a>
                 </div>
               </div>
 
-              <div class="space-y-6 border-t border-gray-200 px-4 py-6">
+              <div class="px-4 py-6 space-y-6 border-t border-gray-200">
                 <div class="flow-root">
-                  <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Create an account</a>
+                  <a href="#" class="block p-2 -m-2 font-medium text-gray-900">Create an account</a>
                 </div>
                 <div class="flow-root">
-                  <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Sign in</a>
+                  <a href="#" class="block p-2 -m-2 font-medium text-gray-900">Sign in</a>
                 </div>
               </div>
 
-              <div class="space-y-6 border-t border-gray-200 px-4 py-6">
+              <div class="px-4 py-6 space-y-6 border-t border-gray-200">
                 <!-- Currency selector -->
                 <form>
                   <div class="inline-block">
                     <label for="mobile-currency" class="sr-only">Currency</label>
-                    <div class="group relative -ml-2 rounded-md border-transparent focus-within:ring-2 focus-within:ring-white">
+                    <div class="relative -ml-2 border-transparent rounded-md group focus-within:ring-2 focus-within:ring-white">
                       <select id="mobile-currency" name="currency" class="flex items-center rounded-md border-transparent bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-gray-700 focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-800">
                         <option v-for="currency in currencies" :key="currency">{{ currency }}</option>
                       </select>
-                      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                        <ChevronDownIcon class="h-5 w-5 text-gray-500" aria-hidden="true" />
+                      <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                        <ChevronDownIcon class="w-5 h-5 text-gray-500" aria-hidden="true" />
                       </div>
                     </div>
                   </div>
@@ -125,27 +125,27 @@
       <nav aria-label="Top">
         <!-- Top navigation -->
         <div class="bg-gray-900">
-          <div class="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-10 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <!-- Currency selector -->
             <form class="hidden lg:block lg:flex-1">
               <div class="flex">
                 <label for="desktop-currency" class="sr-only">Currency</label>
-                <div class="group relative -ml-2 rounded-md border-transparent bg-gray-900 focus-within:ring-2 focus-within:ring-white">
+                <div class="relative -ml-2 bg-gray-900 border-transparent rounded-md group focus-within:ring-2 focus-within:ring-white">
                   <select id="desktop-currency" name="currency" class="flex items-center rounded-md border-transparent bg-gray-900 bg-none py-0.5 pl-2 pr-5 text-sm font-medium text-white focus:border-transparent focus:outline-none focus:ring-0 group-hover:text-gray-100">
                     <option v-for="currency in currencies" :key="currency">{{ currency }}</option>
                   </select>
-                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-                    <ChevronDownIcon class="h-5 w-5 text-gray-300" aria-hidden="true" />
+                  <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                    <ChevronDownIcon class="w-5 h-5 text-gray-300" aria-hidden="true" />
                   </div>
                 </div>
               </div>
             </form>
 
-            <p class="flex-1 text-center text-sm font-medium text-white lg:flex-none">Get free delivery on orders over $100</p>
+            <p class="flex-1 text-sm font-medium text-center text-white lg:flex-none">Get free delivery on orders over $100</p>
 
             <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
               <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Create an account</a>
-              <span class="h-6 w-px bg-gray-600" aria-hidden="true" />
+              <span class="w-px h-6 bg-gray-600" aria-hidden="true" />
               <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
             </div>
           </div>
@@ -154,14 +154,15 @@
         <!-- Secondary navigation -->
         <div class="bg-white">
           <div class="border-b border-gray-200">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div class="flex h-16 items-center justify-between">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between h-16">
                 <!-- Logo (lg+) -->
                 <div class="hidden lg:flex lg:items-center">
                   
                   <NuxtLink :to="'/'">
                     <span class="sr-only">Your Company</span>
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                    <!-- <img class="w-auto h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" /> -->
+                    <NuxtImg src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" fit="inside" format="webp" quality="80" sizes="100vw sm:50vw md:400px" class="w-auto h-8" />
                   </NuxtLink>
 
                   
@@ -170,20 +171,20 @@
                 <div class="hidden h-full lg:flex">
                   <!-- Mega menus -->
                   <PopoverGroup class="ml-8">
-                    <div class="flex h-full justify-center space-x-8">
+                    <div class="flex justify-center h-full space-x-8">
                       <Popover v-for="(category, categoryIdx) in navigation.categories" :key="category.name" class="flex" v-slot="{ open }">
                         <div class="relative flex">
                           <PopoverButton :class="[open ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-700 hover:text-gray-800', 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out']">{{ category.name }}</PopoverButton>
                         </div>
 
-                        <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                          <PopoverPanel class="absolute inset-x-0 top-full text-gray-500 sm:text-sm">
+                        <transition enter-active-class="transition duration-200 ease-out" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition duration-150 ease-in" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                          <PopoverPanel class="absolute inset-x-0 text-gray-500 top-full sm:text-sm">
                             <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-                            <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+                            <div class="absolute inset-0 bg-white shadow top-1/2" aria-hidden="true" />
 
                             <div class="relative bg-white">
-                              <div class="mx-auto max-w-7xl px-8">
-                                <div class="grid grid-cols-2 items-start gap-x-8 gap-y-10 pb-12 pt-10">
+                              <div class="px-8 mx-auto max-w-7xl">
+                                <div class="grid items-start grid-cols-2 pt-10 pb-12 gap-x-8 gap-y-10">
                                   <div class="grid grid-cols-2 gap-x-8 gap-y-10">
                                     <div>
                                       <p :id="`desktop-featured-heading-${categoryIdx}`" class="font-medium text-gray-900">Featured</p>
@@ -234,16 +235,16 @@
                 </div>
 
                 <!-- Mobile menu and search (lg-) -->
-                <div class="flex flex-1 items-center lg:hidden">
-                  <button type="button" class="-ml-2 rounded-md bg-white p-2 text-gray-400" @click="mobileMenuOpen = true">
+                <div class="flex items-center flex-1 lg:hidden">
+                  <button type="button" class="p-2 -ml-2 text-gray-400 bg-white rounded-md" @click="mobileMenuOpen = true">
                     <span class="sr-only">Open menu</span>
-                    <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon class="w-6 h-6" aria-hidden="true" />
                   </button>
 
                   <!-- Search -->
-                  <a href="#" class="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                  <a href="#" class="p-2 ml-2 text-gray-400 hover:text-gray-500">
                     <span class="sr-only">Search</span>
-                    <MagnifyingGlassIcon class="h-6 w-6" aria-hidden="true" />
+                    <MagnifyingGlassIcon class="w-6 h-6" aria-hidden="true" />
                   </a>
                 </div>
 
@@ -251,33 +252,34 @@
                 
                 <NuxtLink :to="'/'" class="lg:hidden">
                   <span class="sr-only">Your Company</span>
-                  <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" class="h-8 w-auto" />
+                  <!-- <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" class="w-auto h-8" /> -->
+                  <NuxtImg src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" fit="inside" format="webp" quality="80" sizes="100vw sm:50vw md:400px" class="w-auto h-8" />
                 </NuxtLink>
                 
 
-                <div class="flex flex-1 items-center justify-end">
+                <div class="flex items-center justify-end flex-1">
                   <div class="flex items-center lg:ml-8">
                     <div class="flex space-x-8">
                       <div class="hidden lg:flex">
-                        <a href="#" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                        <a href="#" class="p-2 -m-2 text-gray-400 hover:text-gray-500">
                           <span class="sr-only">Search</span>
-                          <MagnifyingGlassIcon class="h-6 w-6" aria-hidden="true" />
+                          <MagnifyingGlassIcon class="w-6 h-6" aria-hidden="true" />
                         </a>
                       </div>
 
                       <div class="flex">
-                        <a href="#" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                        <a href="#" class="p-2 -m-2 text-gray-400 hover:text-gray-500">
                           <span class="sr-only">Account</span>
-                          <UserIcon class="h-6 w-6" aria-hidden="true" />
+                          <UserIcon class="w-6 h-6" aria-hidden="true" />
                         </a>
                       </div>
                     </div>
 
-                    <span class="mx-4 h-6 w-px bg-gray-200 lg:mx-6" aria-hidden="true" />
+                    <span class="w-px h-6 mx-4 bg-gray-200 lg:mx-6" aria-hidden="true" />
 
                     <div class="flow-root">
-                      <a href="#" class="group -m-2 flex items-center p-2">
-                        <ShoppingCartIcon class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
+                      <a href="#" class="flex items-center p-2 -m-2 group">
+                        <ShoppingCartIcon class="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
                         <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                         <span class="sr-only">items in cart, view bag</span>
                       </a>
