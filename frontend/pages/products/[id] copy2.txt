@@ -1,0 +1,52 @@
+<template>
+  <div>
+    <h1>{{ product.data.name }}</h1>
+    <p>{{ product.data.description }}</p>
+    <!-- Other product details -->
+
+    <h2>Featured Products</h2>
+    <ul>
+      <li v-for="featuredProduct in featuredProducts.value" :key="featuredProduct.id">
+        <NuxtLink :to="'/products/' + featuredProduct.id">{{ featuredProduct.name }}</NuxtLink>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+const route = useRoute()
+// const product = ref({});
+const { data: product } = await useFetch(`http://localhost:8000/api/products/`+ route.params.id);
+const featuredProducts = ref([]);
+
+onMounted(async () => {
+
+  // Fetch specific product details from API using route params
+  
+  // const response = await fetch(`http://localhost:8000/api/products/${$route.params.id}`);
+  // product.value = response;
+
+  // Fetch featured products (you may want to adjust this API call based on your requirements)
+  // const featuredResponse = await fetch('http://localhost:8000/api/products');
+  const featuredResponse = await useAsyncData(
+  "products",
+  () => $fetch('http://localhost:8000/api/products'),
+  {
+    transform: (products) =>
+      products.data.map((product) => ({
+        id: product.id,
+        name: product.name,
+        image_url: product.image_url,
+        description: product.description,
+        price: product.price,
+      })),
+      lazy: true,
+  }
+);
+  console.log(featuredResponse);
+  featuredProducts.value = featuredResponse.data;
+});
+
+// console.log(featuredProducts.value);
+</script>
